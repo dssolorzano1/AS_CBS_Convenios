@@ -9,7 +9,7 @@ import com.banquito.cbs.convenios.modelo.Convenio;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CuentaPeticionMapper {
     
-    ConvenioPeticionDTO toDto(ConvenioPeticionDTO convenioPeticionDTO);
-
-    Convenio toEntity(ConvenioPeticionDTO convenioPeticionDTO);
+    Convenio toEntity(ConvenioPeticionDTO peticionDTO);
+    
+    ConvenioPeticionDTO toDto(Convenio convenio);
 } 

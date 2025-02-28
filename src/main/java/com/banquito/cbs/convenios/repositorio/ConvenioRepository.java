@@ -1,10 +1,9 @@
 package com.banquito.cbs.convenios.repositorio;
 
-import com.banquito.cbs.convenios.modelo.Convenio;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.banquito.cbs.convenios.modelo.Convenio;
+import java.util.List;
 
-@Repository
-public interface ConvenioRepository extends JpaRepository<Convenio, Long> {
-    // Aquí puedes agregar métodos personalizados de consulta si los necesitas
+public interface ConvenioRepository extends JpaRepository<Convenio, Integer> {
+    List<Convenio> findByIdCuentaAndTipoDiferido(Integer idCuenta, String tipoDiferido);
 } 
