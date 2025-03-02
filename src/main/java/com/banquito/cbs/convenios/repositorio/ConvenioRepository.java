@@ -1,9 +1,14 @@
 package com.banquito.cbs.convenios.repositorio;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.banquito.cbs.convenios.modelo.Convenio;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
-public interface ConvenioRepository extends JpaRepository<Convenio, Integer> {
-    List<Convenio> findByIdCuentaAndTipoDiferido(Integer idCuenta, String tipoDiferido);
-} 
+@Repository
+public interface ConvenioRepository extends MongoRepository<Convenio, Integer> {
+    List<Convenio> findByIdCuenta(Integer idCuenta);
+    List<Convenio> findByIdCuentaAndFechaFinAfter(Integer idCuenta, LocalDateTime fechaFin);
+}

@@ -1,42 +1,39 @@
 package com.banquito.cbs.convenios.modelo;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 
-@Entity
-@Table(name = "convenio")
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
 @Data
 @ToString
+@Document(collection = "CONVENIOS")
 public class Convenio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @MongoId
     private Integer id;
-    
-    @Column(name = "id_cuenta", nullable = false)
     private Integer idCuenta;
-    
-    @Column(name = "meses_diferidos", precision = 2, nullable = false)
     private Integer mesesDiferidos;
-    
-    @Column(name = "monto_minimo", precision = 20, scale = 2)
+
+    @Field(targetType = FieldType.DECIMAL128)
     private BigDecimal montoMinimo;
-    
-    @Column(name = "tipo_diferido", length = 3)
+
     private String tipoDiferido;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaFin;
     
-    @Column(name = "fecha_inicio", nullable = false)
-    private LocalDate fechaInicio;
-    
-    @Column(name = "fecha_fin", nullable = false)
-    private LocalDate fechaFin;
+    public Convenio(Integer idCuenta, Integer mesesDiferidos, BigDecimal montoMinimo, String tipoDiferido, 
+                    LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        this.idCuenta = idCuenta;
+        this.mesesDiferidos = mesesDiferidos;
+        this.montoMinimo = montoMinimo;
+        this.tipoDiferido = tipoDiferido;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+    }
 }
